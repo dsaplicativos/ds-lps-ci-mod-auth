@@ -1,28 +1,44 @@
-<h1><?php echo lang('login_heading');?></h1>
-<p><?php echo lang('login_subheading');?></p>
+<!--Form with header-->
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-block px-4">
+            <div class="mt-1 mb-2 text-center">
+                <h3>Login</h3>
+            </div>
+            <div class="mt-3 text-center mb-3">
+                <div id="infoMessage"><?php echo $message; ?></div>
+            </div>
+            <!--Body-->
+            <?php echo form_open("auth/login"); ?>
 
-<div id="infoMessage"><?php echo $message;?></div>
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <div class="md-form">
+                        <?php echo form_input($identity); ?>
+                        <label for="identity">E-mail</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="md-form">
+                        <?php echo form_input($password); ?>
+                        <label for="password">Senha</label>
+                    </div>
+                </div>
+            </div>
 
-<?php echo form_open("auth/login");?>
+            <div class="form-group">
+                <input type="checkbox" id="remember" name="remember" value="1">
+                <label for="remember">Lembrar-me</label>
+            </div>
 
-  <p>
-    <?php echo lang('login_identity_label', 'identity');?>
-    <?php echo form_input($identity);?>
-  </p>
+            <div class="mt- text-center">
+                <button class="btn btn-primary">Enviar</button>
+            </div>
 
-  <p>
-    <?php echo lang('login_password_label', 'password');?>
-    <?php echo form_input($password);?>
-  </p>
-
-  <p>
-    <?php echo lang('login_remember_label', 'remember');?>
-    <?php echo form_checkbox('remember', '1', FALSE, 'id="remember"');?>
-  </p>
+            <?php echo form_close(); ?>
+            <p><a href="forgot_password">Esqueceu a senha?</a></p>
+        </div>
+    </div>
+</div>
 
 
-  <p><?php echo form_submit('submit', lang('login_submit_btn'));?></p>
-
-<?php echo form_close();?>
-
-<p><a href="forgot_password"><?php echo lang('login_forgot_password');?></a></p>

@@ -1,20 +1,37 @@
-<h1><?php echo lang('edit_group_heading');?></h1>
-<p><?php echo lang('edit_group_subheading');?></p>
+<!--Form with header-->
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-block px-4">
+            <div class="mt-1 mb-2 text-center">
+                <h3>Editar Grupo</h3>
+            </div>
+            <div class="mt-3 text-center mb-3">
+                <div id="infoMessage"><?php echo $message; ?></div>
+            </div>
+            <!--Body-->
+            <?php echo form_open(current_url());?>
 
-<div id="infoMessage"><?php echo $message;?></div>
+            <div class="row mt-3">
+                <div class="col-md-4">
+                    <div class="md-form">
+                        <?php echo form_input($group_name);?>
+                        <label for="group_name">Nome</label>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="md-form">
+                        <?php echo form_input($group_description);?>
+                        <label for="group_description">Descrição</label>
+                    </div>
+                </div>
+            </div>
 
-<?php echo form_open(current_url());?>
+            <div class="mt- text-center">
+                <button class="btn btn-primary">Enviar</button>
+            </div>
 
-      <p>
-            <?php echo lang('edit_group_name_label', 'group_name');?> <br />
-            <?php echo form_input($group_name);?>
-      </p>
+            <?php echo form_close(); ?>
+        </div>
+    </div>
+</div>
 
-      <p>
-            <?php echo lang('edit_group_desc_label', 'description');?> <br />
-            <?php echo form_input($group_description);?>
-      </p>
-
-      <p><?php echo form_submit('submit', lang('edit_group_submit_btn'));?></p>
-
-<?php echo form_close();?>
