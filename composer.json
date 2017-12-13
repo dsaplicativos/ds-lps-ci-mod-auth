@@ -1,6 +1,6 @@
 {
   "name": "dsapps/auth",
-  "type": "codeigniter-library",
+  "type": "codeigniter-module",
   "authors": [
     {
       "name": "DS Aplicativos",
