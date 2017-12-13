@@ -50,7 +50,8 @@ class Auth extends MY_Controller
 				$this->data['users'][$k]->groups = $this->ion_auth->get_users_groups($user->id)->result();
 			}
 
-			$this->_render_page('auth/index', $this->data);
+//			$this->_render_page('auth/index', $this->data);
+            $this->show($this->load->view('auth/index', $this->data));
 		}
 	}
 
@@ -95,14 +96,17 @@ class Auth extends MY_Controller
 			$this->data['identity'] = array('name' => 'identity',
 				'id' => 'identity',
 				'type' => 'text',
+				'class' => 'form-control',
 				'value' => $this->form_validation->set_value('identity'),
 			);
 			$this->data['password'] = array('name' => 'password',
 				'id' => 'password',
 				'type' => 'password',
+                'class' => 'form-control',
 			);
 
-			$this->_render_page('auth/login', $this->data);
+//			$this->_render_page('auth/login', $this->data);
+            $this->show($this->load->view('auth/login', $this->data, true));
 		}
 	}
 
@@ -148,28 +152,32 @@ class Auth extends MY_Controller
 				'name' => 'old',
 				'id' => 'old',
 				'type' => 'password',
+                'class' => 'form-control',
 			);
 			$this->data['new_password'] = array(
 				'name' => 'new',
 				'id' => 'new',
 				'type' => 'password',
+				'class' => 'form-control',
 				'pattern' => '^.{' . $this->data['min_password_length'] . '}.*$',
 			);
 			$this->data['new_password_confirm'] = array(
 				'name' => 'new_confirm',
 				'id' => 'new_confirm',
 				'type' => 'password',
+				'class' => 'form-control',
 				'pattern' => '^.{' . $this->data['min_password_length'] . '}.*$',
 			);
 			$this->data['user_id'] = array(
 				'name' => 'user_id',
 				'id' => 'user_id',
 				'type' => 'hidden',
+				'class' => 'form-control',
 				'value' => $user->id,
 			);
 
-			// render
-			$this->_render_page('auth/change_password', $this->data);
+//			$this->_render_page('auth/change_password', $this->data);
+            $this->show($this->load->view('auth/change_password', $this->data, true));
 		}
 		else
 		{
@@ -226,7 +234,8 @@ class Auth extends MY_Controller
 
 			// set any errors and display the form
 			$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-			$this->_render_page('auth/forgot_password', $this->data);
+//			$this->_render_page('auth/forgot_password', $this->data);
+            $this->show($this->load->view('auth/forgot_password', $this->data, true));
 		}
 		else
 		{
@@ -299,25 +308,29 @@ class Auth extends MY_Controller
 					'name' => 'new',
 					'id' => 'new',
 					'type' => 'password',
+					'class' => 'form-control',
 					'pattern' => '^.{' . $this->data['min_password_length'] . '}.*$',
 				);
 				$this->data['new_password_confirm'] = array(
 					'name' => 'new_confirm',
 					'id' => 'new_confirm',
 					'type' => 'password',
+                    'class' => 'form-control',
 					'pattern' => '^.{' . $this->data['min_password_length'] . '}.*$',
 				);
 				$this->data['user_id'] = array(
 					'name' => 'user_id',
 					'id' => 'user_id',
 					'type' => 'hidden',
+					'class' => 'form-control',
 					'value' => $user->id,
 				);
 				$this->data['csrf'] = $this->_get_csrf_nonce();
 				$this->data['code'] = $code;
 
 				// render
-				$this->_render_page('auth/reset_password', $this->data);
+//				$this->_render_page('auth/reset_password', $this->data);
+                $this->show($this->load->view('auth/reset_password', $this->data, true));
 			}
 			else
 			{
@@ -416,7 +429,8 @@ class Auth extends MY_Controller
 			$this->data['csrf'] = $this->_get_csrf_nonce();
 			$this->data['user'] = $this->ion_auth->user($id)->row();
 
-			$this->_render_page('auth/deactivate_user', $this->data);
+//			$this->_render_page('auth/deactivate_user', $this->data);
+            $this->show($this->load->view('auth/deactivate_user', $this->data, true));
 		}
 		else
 		{
@@ -446,6 +460,8 @@ class Auth extends MY_Controller
 	 */
 	public function create_user()
 	{
+        $this->add_script('jquery.mask.min');
+
 		$this->data['title'] = $this->lang->line('create_user_heading');
 
 		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
@@ -504,52 +520,62 @@ class Auth extends MY_Controller
 				'name' => 'first_name',
 				'id' => 'first_name',
 				'type' => 'text',
+				'class' => 'form-control',
 				'value' => $this->form_validation->set_value('first_name'),
 			);
 			$this->data['last_name'] = array(
 				'name' => 'last_name',
 				'id' => 'last_name',
 				'type' => 'text',
+				'class' => 'form-control',
 				'value' => $this->form_validation->set_value('last_name'),
 			);
 			$this->data['identity'] = array(
 				'name' => 'identity',
 				'id' => 'identity',
 				'type' => 'text',
+				'class' => 'form-control',
 				'value' => $this->form_validation->set_value('identity'),
 			);
 			$this->data['email'] = array(
 				'name' => 'email',
 				'id' => 'email',
 				'type' => 'text',
+				'class' => 'form-control',
 				'value' => $this->form_validation->set_value('email'),
 			);
 			$this->data['company'] = array(
 				'name' => 'company',
 				'id' => 'company',
 				'type' => 'text',
+				'class' => 'form-control',
 				'value' => $this->form_validation->set_value('company'),
 			);
 			$this->data['phone'] = array(
 				'name' => 'phone',
 				'id' => 'phone',
 				'type' => 'text',
+				'class' => 'form-control',
+				'data-mask' => '(00) 0000-00000',
 				'value' => $this->form_validation->set_value('phone'),
 			);
 			$this->data['password'] = array(
 				'name' => 'password',
 				'id' => 'password',
 				'type' => 'password',
+				'class' => 'form-control',
 				'value' => $this->form_validation->set_value('password'),
 			);
 			$this->data['password_confirm'] = array(
 				'name' => 'password_confirm',
 				'id' => 'password_confirm',
 				'type' => 'password',
+				'class' => 'form-control',
 				'value' => $this->form_validation->set_value('password_confirm'),
 			);
 
-			$this->_render_page('auth/create_user', $this->data);
+//			$this->_render_page('auth/create_user', $this->data);
+            $this->show($this->load->view('auth/create_user', $this->data, true));
 		}
 	}
 
@@ -560,6 +586,8 @@ class Auth extends MY_Controller
 	 */
 	public function edit_user($id)
 	{
+        $this->add_script('jquery.mask.min');
+
 		$this->data['title'] = $this->lang->line('edit_user_heading');
 
 		if (!$this->ion_auth->logged_in() || (!$this->ion_auth->is_admin() && !($this->ion_auth->user()->row()->id == $id)))
@@ -674,38 +702,46 @@ class Auth extends MY_Controller
 			'name'  => 'first_name',
 			'id'    => 'first_name',
 			'type'  => 'text',
+			'class' => 'form-control',
 			'value' => $this->form_validation->set_value('first_name', $user->first_name),
 		);
 		$this->data['last_name'] = array(
 			'name'  => 'last_name',
 			'id'    => 'last_name',
 			'type'  => 'text',
+			'class' => 'form-control',
 			'value' => $this->form_validation->set_value('last_name', $user->last_name),
 		);
 		$this->data['company'] = array(
 			'name'  => 'company',
 			'id'    => 'company',
 			'type'  => 'text',
+			'class' => 'form-control',
 			'value' => $this->form_validation->set_value('company', $user->company),
 		);
 		$this->data['phone'] = array(
 			'name'  => 'phone',
 			'id'    => 'phone',
 			'type'  => 'text',
+			'class' => 'form-control',
+            'data-mask' => '(00) 0000-00000',
 			'value' => $this->form_validation->set_value('phone', $user->phone),
 		);
 		$this->data['password'] = array(
 			'name' => 'password',
 			'id'   => 'password',
-			'type' => 'password'
+			'type' => 'password',
+            'class' => 'form-control',
 		);
 		$this->data['password_confirm'] = array(
 			'name' => 'password_confirm',
 			'id'   => 'password_confirm',
-			'type' => 'password'
+			'type' => 'password',
+            'class' => 'form-control',
 		);
 
-		$this->_render_page('auth/edit_user', $this->data);
+//		$this->_render_page('auth/edit_user', $this->data);
+        $this->show($this->load->view('auth/edit_user', $this->data, true));
 	}
 
 	/**
@@ -744,16 +780,19 @@ class Auth extends MY_Controller
 				'name'  => 'group_name',
 				'id'    => 'group_name',
 				'type'  => 'text',
+				'class' => 'form-control',
 				'value' => $this->form_validation->set_value('group_name'),
 			);
 			$this->data['description'] = array(
 				'name'  => 'description',
 				'id'    => 'description',
 				'type'  => 'text',
+				'class' => 'form-control',
 				'value' => $this->form_validation->set_value('description'),
 			);
 
-			$this->_render_page('auth/create_group', $this->data);
+//			$this->_render_page('auth/create_group', $this->data);
+            $this->show($this->load->view('auth/create_group', $this->data, true));
 		}
 	}
 
@@ -812,6 +851,7 @@ class Auth extends MY_Controller
 			'name'    => 'group_name',
 			'id'      => 'group_name',
 			'type'    => 'text',
+            'class'   => 'form-control',
 			'value'   => $this->form_validation->set_value('group_name', $group->name),
 			$readonly => $readonly,
 		);
@@ -819,10 +859,12 @@ class Auth extends MY_Controller
 			'name'  => 'group_description',
 			'id'    => 'group_description',
 			'type'  => 'text',
+            'class' => 'form-control',
 			'value' => $this->form_validation->set_value('group_description', $group->description),
 		);
 
-		$this->_render_page('auth/edit_group', $this->data);
+//		$this->_render_page('auth/edit_group', $this->data);
+        $this->show($this->load->view('auth/edit_group', $this->data, true));
 	}
 
 	/**
