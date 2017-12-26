@@ -1,7 +1,7 @@
 <!--Form with header-->
 <div class="container mt-5">
     <div class="card">
-        <div class="card-block px-4">
+        <div class="card-block px-4 py-3">
             <div class="mt-1 mb-2 text-center">
                 <h3>Esqueceu a senha?</h3>
             </div>
